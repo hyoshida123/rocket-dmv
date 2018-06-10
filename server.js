@@ -30,6 +30,10 @@ const display = (error, data, response) => {
 //   console.log(data);
 // });
 
+app.get('/', (request, response) => {
+  response.render("./index.html");
+});
+
 app.post('/api', (request, response) => {
   switch (request.query.endpoint) {
     case 'approveSignedDocument': { // DONE, except for text and email notifications
@@ -41,7 +45,20 @@ app.post('/api', (request, response) => {
     }
     case 'receiveEnvelopeStatusChanges': {
       console.log('receiveEnvelopeStatusChanges!!!');
-      console.log(request.body);
+      let body = [];
+      request.on('data', (chunk) => {
+        console.log(chunk);
+        body.push(chunk);
+      }).on('end', () => {
+        body = Buffer.concat(body).toString();
+        // At this point, 'body' has the entire request body stored in it as a string
+        try {
+          body = JSON.parse(body);
+          console.log(body);
+        } catch (error) {
+          console.trace(error);
+        }
+      });
       break;
     }
     case 'submitUserData': { // DONE, except for getting template
