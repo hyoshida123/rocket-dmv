@@ -14,18 +14,18 @@ ex) https://oshaw-dmv.herokuapp.com/api?endpoint=[name_of_endpoint]
   Call this in operator's front end when operator presses approve
   Front end passes document id
   
-getDriverSignedDocuments:
+2. getDriverSignedDocuments:
   method: GET
   Gets all driver signed documents
   Call this on a regular interval to update operator's front end documents list
   
-getOperatorSignedDocuments:
+3. getOperatorSignedDocuments:
   method: GET
   Gets all operator signed documents belonging to a user
   Call this on iOS on a regular interval to update driver's app
   Pass in first name and last name so only documents linked to user return
   
-submitUserData:
+4. submitUserData:
   method: POST
   Saves user data to Firebase and sends Docusign signature request email
   Call on iOS
