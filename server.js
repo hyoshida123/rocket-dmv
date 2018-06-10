@@ -47,6 +47,7 @@ app.post('/api', (request, response) => {
       console.log('receiveEnvelopeStatusChanges!!!');
       let body = [];
       request.on('data', (chunk) => {
+        console.log(chunk);
         body.push(chunk);
       }).on('end', () => {
         body = Buffer.concat(body).toString();
