@@ -13,33 +13,6 @@ const redirectURI = 'https://www.docusign.com/api';
 const privateKeyFilename = 'keys/docusign_private_key.txt';
 
 module.exports = {
-  getAccountListStatus: (callback) => {
-    module.exports.getBearerToken(() => {
-      // https://developers.docusign.com/esign-rest-api/code-examples/polling-for-envelope-status
-      // Instantiate a new EnvelopesApi
-      const envelopesApi = new docusign.EnvelopesApi();
-
-      // The list status changes call requires at least a from_date OR
-      // a set of envelopeIds. here we filter using a from_date
-      const options = {
-        method: 'GET',
-      };
-
-      // Set from date to filter envelopes (ex: Jan 15, 2018)
-      // options.fromDate = '2018/10/06';
-
-      // Call the listStatusChanges() API
-      envelopesApi.listStatus(accountId, options, function (error, data, response) {
-        if (error) {
-          callback('Error: ' + error, null);
-          return;
-        }
-        if (data) {
-          callback(null, data);
-        }
-      });
-    });
-  },
   getBearerToken: (callback) => {
     apiClient.setBasePath(baseUrl);
     // assign the api client to the Configuration object
@@ -72,6 +45,9 @@ module.exports = {
         });
       }
     });
+  },
+  receiveEnvelopeStatusChanges: (data) => {
+    console.log('receiveEnvelopeStatusChanges!!!');
   },
   sendEmailSignatureRequest: (template, callback) => {
     // template = {
@@ -121,34 +97,6 @@ module.exports = {
           callback(null, envelopeSummary);
         }
       });
-    });
-  },
-  signatureUpdateListener: (callback) => {
-    module.exports.getBearerToken(() => {
-      const checkForUpdates = () => {
-        // https://developers.docusign.com/esign-rest-api/code-examples/polling-for-envelope-status
-        // Instantiate a new EnvelopesApi
-        const envelopesApi = new docusign.EnvelopesApi();
-
-        // The list status changes call requires at least a from_date OR
-        // a set of envelopeIds. here we filter using a from_date
-        const options = {};
-
-        // Set from date to filter envelopes (ex: Jan 15, 2018)
-        options.fromDate = '2018/10/06';
-
-        // Call the listStatusChanges() API
-        envelopesApi.listStatusChanges(accountId, options, function (error, envelopes, response) {
-          if (error) {
-            callback('Error: ' + error, null);
-            return;
-          }
-          if (envelopes) {
-            callback(null, envelopes);
-          }
-        });
-      }
-      setTimeout(checkForUpdates, 900000); // 15 minutes, max frequency
     });
   }
 };

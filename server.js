@@ -34,7 +34,9 @@ app.post('/api', (request, response) => {
   switch (request.query.endpoint) {
     case 'approveSignedDocument': { // DONE, except for text and email notifications
       console.log("approveSignedDocument was requested");
-      approveSignedDocument('-LEbo-3QdesvhpjLzjXy', (error, data) => { display(error, data, response) });
+      approveSignedDocument('-LEbo-3QdesvhpjLzjXy', (error, data) => {
+        display(error, data, response)
+      });
       break;
     }
 

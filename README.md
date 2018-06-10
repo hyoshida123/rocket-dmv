@@ -26,7 +26,7 @@ ex) https://oshaw-dmv.herokuapp.com/api?endpoint=[name_of_endpoint]
   Pass in first name and last name so only documents linked to user return
   
 4. submitUserData:
-  method: POST
+  method: GET
   Saves user data to Firebase and sends Docusign signature request email
   Call on iOS
   Pass in firstName, lastName, zipCode
