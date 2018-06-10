@@ -7,18 +7,21 @@ const app = express();
 
 app.use(express.static('./client'));
 
+// Oscar
 app.get('/api/approveSignedDocument', (request, response) => {
   approveSignedDocument((data) => {
     response.send(data);
   });
 });
 
+// Hideaki
 app.get('/api/getSignedDocuments', (request, response) => {
   getSignedDocuments((data) => {
     response.send(data);
   });
 });
 
+// Sang
 app.get('/api/submitSignedDocument', (request, response) => {
   submitSignedDocument((data) => {
     response.send(data);

@@ -4,3 +4,4 @@ semantic
 *.min.js
 npm-debug.log
 .vscode
+.ignore.js
