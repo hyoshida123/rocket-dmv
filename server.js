@@ -33,16 +33,7 @@ app.post('/api', (request, response) => {
       approveSignedDocument('-LEbo-3QdesvhpjLzjXy', (error, data) => { display(error, data, response) });
       break;
     }
-<<<<<<< HEAD
-    case 'getDriverSignedDocuments': { // DONE
-        getDriverSignedDocuments((error, data) => { display(error, data, response) });
-        break;
-    }
-    case 'getOperatorSignedDocuments': { // DONE
-      getOperatorSignedDocuments((error, data) => { display(error, data, response) });
-      break;
-    }
-||||||| merged common ancestors
+
     case 'getDriverSignedDocuments': { // DONE
       getDriverSignedDocuments((error, data) => { display(error, data, response) });
       break;
@@ -51,8 +42,7 @@ app.post('/api', (request, response) => {
       getOperatorSignedDocuments((error, data) => { display(error, data, response) });
       break;
     }
-=======
->>>>>>> b7a89fd2d862d2237491d9aab369193db7e5a5d0
+
     case 'submitUserData': { // DONE, except for getting template
       submitUserData(
         {
