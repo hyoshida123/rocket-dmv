@@ -1,5 +1,6 @@
 'use strict';
 const express = require('express');
+const bodyParser = require('body-parser')
 const app = express();
 
 const approveSignedDocument = require('./server/approveSignedDocument.js');
@@ -9,10 +10,12 @@ const getDriverSignedDocuments = require('./server/getDriverSignedDocuments.js')
 const submitUserData = require('./server/submitUserData.js');
 
 app.use(express.static('./client'));
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json())
 
 const display = (error, data, response) => {
   if (error) {
-    response.send('ERROR:', error);
+    response.status('ERROR:').send(error);
   }
   else {
     response.send(data);
@@ -30,27 +33,17 @@ const display = (error, data, response) => {
 app.post('/api', (request, response) => {
   switch (request.query.endpoint) {
     case 'approveSignedDocument': { // DONE, except for text and email notifications
+      console.log("approveSignedDocument was requested");
       approveSignedDocument('-LEbo-3QdesvhpjLzjXy', (error, data) => { display(error, data, response) });
-      break;
-    }
-
-    case 'getDriverSignedDocuments': { // DONE
-      getDriverSignedDocuments((error, data) => { display(error, data, response) });
-      break;
-    }
-    case 'getOperatorSignedDocuments': { // DONE
-      getOperatorSignedDocuments((error, data) => { display(error, data, response) });
       break;
     }
 
     case 'submitUserData': { // DONE, except for getting template
       submitUserData(
-        {
-          firstName: 'Oscar',
-          lastName: 'Shaw',
-          zipCode: '90120',
-        },
-        (error, data) => { display(error, data, response) }
+        request.body,
+        (error, data) => {
+          display(error, data, response);
+        }
       );
       break;
     }
@@ -63,11 +56,14 @@ app.post('/api', (request, response) => {
 
 app.get('/api', (request, response) => {
   switch (request.query.endpoint) {
+
     case 'getDriverSignedDocuments': { // DONE
+      console.log("getDriverSignedDocuments was requested");
       getDriverSignedDocuments((error, data) => { display(error, data, response) });
       break;
     }
     case 'getOperatorSignedDocuments': { // DONE
+      console.log("getOperatorSignedDocuments was requested");
       getOperatorSignedDocuments((error, data) => { display(error, data, response) });
       break;
     }
