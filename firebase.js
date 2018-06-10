@@ -6,7 +6,7 @@ let config = {
   authDomain: "uberdmv-206723.firebaseapp.com",
   databaseURL: "https://uberdmv-206723.firebaseio.com",
   projectId: "uberdmv-206723",
-  storageBucket: "",
+  storageBucket: "uberdmv-206723.appspot.com",
   messagingSenderId: "825281072043"
 };
 
