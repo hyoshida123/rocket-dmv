@@ -39,7 +39,10 @@ app.post('/api', (request, response) => {
       });
       break;
     }
-
+    case 'receiveEnvelopeStatusChanges': {
+      console.log('receiveEnvelopeStatusChanges!!!');
+      break;
+    }
     case 'submitUserData': { // DONE, except for getting template
       submitUserData(
         request.body,
@@ -58,7 +61,15 @@ app.post('/api', (request, response) => {
 
 app.get('/api', (request, response) => {
   switch (request.query.endpoint) {
-
+    case 'submitUserData': { // DONE, except for getting template
+      submitUserData(
+        request.body,
+        (error, data) => {
+          display(error, data, response);
+        }
+      );
+      break;
+    }
     case 'getDriverSignedDocuments': { // DONE
       console.log("getDriverSignedDocuments was requested");
       getDriverSignedDocuments((error, data) => { display(error, data, response) });

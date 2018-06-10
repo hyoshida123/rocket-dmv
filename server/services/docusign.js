@@ -68,7 +68,7 @@ module.exports = {
 
       // / assign template information including ID and role(s)
       envelope.templateId = template.id;
-      // envelope.templateId = '32a7dd00-5df7-431d-98f9-6269c7b4d9a7';
+      envelope.templateId = '9d7a3a17-d780-49d2-8634-b23d168c081e';
 
       // create a template role with a valid templateId and roleName and assign signer info
       let templateRole = new docusign.TemplateRole();
