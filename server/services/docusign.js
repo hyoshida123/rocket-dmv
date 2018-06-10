@@ -23,7 +23,6 @@ module.exports = {
     // get DocuSign OAuth authorization url:
     var oauthLoginUrl = apiClient.getJWTUri(integratorKey, redirectURI, oAuthBaseUrl);
     // open DocuSign OAuth authorization url in the browser, login and grant access
-    console.log(oauthLoginUrl);
     // END OF NOTE
 
     // configure the ApiClient to asynchronously get an access to token and store it
@@ -38,7 +37,6 @@ module.exports = {
             var accountDomain = baseUri.split('/v2');
             // below code required for production, no effect in demo (same domain)
             apiClient.setBasePath(accountDomain[0] + "/restapi");
-            console.log('LoginInformation: ' + JSON.stringify(userInfo.accounts));
             callback(null, null);
           }
           else {
@@ -93,10 +91,37 @@ module.exports = {
           return callback(error, null);
         }
         if (envelopeSummary) {
-          console.log('EnvelopeSummary: ' + JSON.stringify(envelopeSummary));
           callback(null, envelopeSummary);
         }
       });
+    });
+  },
+  signatureUpdateListener: (callback) => {
+    module.exports.getBearerToken(() => {
+      const checkForUpdates = () => {
+        // https://developers.docusign.com/esign-rest-api/code-examples/polling-for-envelope-status
+        // Instantiate a new EnvelopesApi
+        const envelopesApi = new docusign.EnvelopesApi();
+
+        // The list status changes call requires at least a from_date OR
+        // a set of envelopeIds. here we filter using a from_date
+        const options = {};
+
+        // Set from date to filter envelopes (ex: Jan 15, 2018)
+        options.fromDate = '2018/10/06';
+
+        // Call the listStatusChanges() API
+        envelopesApi.listStatusChanges(accountId, options, function (error, envelopes, response) {
+          if (error) {
+            callback('Error: ' + error, null);
+            return;
+          }
+          if (envelopes) {
+            callback(null, envelopes);
+          }
+        });
+      }
+      setTimeout(checkForUpdates, 900000); // 15 minutes, max frequency
     });
   }
 };

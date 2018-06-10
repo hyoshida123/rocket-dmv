@@ -7,7 +7,7 @@ module.exports = (callback) => {
       callback(error, null);
     }
     else {
-      callback(null, 'getSignedDocuments response');
+      callback(null, firebaseResponse);
     }
   });
 }
