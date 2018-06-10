@@ -30,6 +30,10 @@ const display = (error, data, response) => {
 //   console.log(data);
 // });
 
+app.get('/', (request, response) => {
+  res.render("./index.html");
+});
+
 app.post('/api', (request, response) => {
   switch (request.query.endpoint) {
     case 'approveSignedDocument': { // DONE, except for text and email notifications
