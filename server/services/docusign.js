@@ -73,9 +73,9 @@ module.exports = {
       // create a template role with a valid templateId and roleName and assign signer info
       let templateRole = new docusign.TemplateRole();
       templateRole = Object.assign(templateRole, template.role);
-      // templateRole.roleName = 'Applicant';
-      // templateRole.name = 'Oscar Shaw';
-      // templateRole.email = 'oshaw587@insite.4cd.edu'
+      templateRole.roleName = 'Applicant';
+      templateRole.name = 'Oscar Shaw';
+      templateRole.email = 'oshaw587@insite.4cd.edu'
 
       // create a list of template roles and add our newly created role
       const templateRolesList = [];
