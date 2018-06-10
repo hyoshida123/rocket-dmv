@@ -2,7 +2,7 @@ const docusign = require('docusign-esign');
 const apiClient = new docusign.ApiClient();
 
 const accessToken = 'eyJ0eXAiOiJNVCIsImFsZyI6IlJTMjU2Iiwia2lkIjoiNjgxODVmZjEtNGU1MS00Y2U5LWFmMWMtNjg5ODEyMjAzMzE3In0.AQgAAAABAAUABwCA1OYSoM7VSAgAgBQKIePO1UgCAKIhy8IofvRBpmDvnvIXrUsVAAEAAAAYAAEAAAAKAAAADQAkAAAAYWUzMGVhNGUtMzk1OS00ZDFjLWI4NjctZmNiNTdkMmRjNGRmMACAkd_an87VSA.RpN-OQN6uRsOGzBVtXfLR_915vPdlACx7IeacjyajLf8bG2ieLh0GJdK9dKUMJ9iiQ-_8f_Ey0ibVoOSYdv4sbrracvEmomOfIDAfXTZriCViUp-Ud62bet_olA69Y57pZpKqIv-i878GEaJ6odIzWDeEf5SXPj0If1xqsBRF9dJCWqCVOKVPGIJPcOP1scZjHsB0K_syhvjw0OV3P_Sh9qTIF3hK0j_wL9VpMDZDvCH2_lxbVrqJz4DyvZcnRO3pcPz5_RyUy9YBz2Erp1M7vCWIrxLA-K3MPmusnadMJymzQT8da_-jnvYTEr16ZRT0UERCdTlRIUnqtZSmsLpoA';
-const accountId = '"e32318d9-7c98-4adb-bf32-746edc3317a8"';
+const accountId = "e32318d9-7c98-4adb-bf32-746edc3317a8";
 apiClient.setBasePath('https://demo.docusign.net/restapi');
 
 module.exports = {
