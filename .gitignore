@@ -1,7 +1,8 @@
 node_modules
 semantic
-*.txt
 *.min.js
 npm-debug.log
 .vscode
 .ignore.js
+.idea
+.DS_Store

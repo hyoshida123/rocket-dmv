@@ -1,61 +1,165 @@
 'use strict';
 const express = require('express');
-const approveSignedDocument = require('./server/approveSignedDocument.js');
-const callbackDriverSignedDocument = require('./server/callbackDriverSignedDocument.js');
-const callbackOperatorSignedDocument = require('./server/callbackOperatorSignedDocument.js');
-const getApprovedDocuments = require('./server/getApprovedDocuments.js');
-const getSignedDocuments = require('./server/getSignedDocuments.js');
-const saveUserData = require('./server/saveUserData.js');
 const app = express();
+
+const approveSignedDocument = require('./server/approveSignedDocument.js');
+const docusign = require('./server/services/docusign.js');
+const getOperatorSignedDocuments = require('./server/getOperatorSignedDocuments.js');
+const getDriverSignedDocuments = require('./server/getDriverSignedDocuments.js');
+const submitUserData = require('./server/submitUserData.js');
 
 app.use(express.static('./client'));
 
-// Oscar
-app.get('/api/approveSignedDocument', (request, response) => {
-  approveSignedDocument('-LEbo-3QdesvhpjLzjXy', (data) => {
+const display = (error, data, response) => {
+  if (error) {
+    response.send('ERROR:', error);
+  }
+  else {
     response.send(data);
-  });
-});
+  }
+}
 
-// Oscar
-app.get('/api/callbackOperatorSignedDocument', (request, response) => {
-  callbackOperatorSignedDocument((data) => {
-    response.send(data);
-  });
-});
+// docusign.signatureUpdateListener((error, envelopes) => { // Listen for updates
+//   console.log(envelopes);
+// });
 
-// Hideaki
-app.get('/api/getSignedDocuments', (request, response) => {
-  getSignedDocuments((data) => {
-    response.send(data);
-  });
-});
+// docusign.getAccountListStatus((error, data) => { // Listen for updates
+//   console.log(data);
+// });
 
-app.get('/api/getApprovedDocuments', (request, response) => {
-  getApprovedDocuments((data) => {
-    response.send(data);
-  });
-});
+app.post('/api', (request, response) => {
+  switch (request.query.endpoint) {
+    case 'approveSignedDocument': { // DONE, except for text and email notifications
+      approveSignedDocument('-LEbo-3QdesvhpjLzjXy', (error, data) => { display(error, data, response) });
+      break;
+    }
 
-// Sang
-app.get('/api/callbackDriverSignedDocument', (request, response) => {
-  callbackDriverSignedDocument((data) => {
-    response.send(data);
-  });
-});
+    case 'getDriverSignedDocuments': { // DONE
+      getDriverSignedDocuments((error, data) => { display(error, data, response) });
+      break;
+    }
+    case 'getOperatorSignedDocuments': { // DONE
+      getOperatorSignedDocuments((error, data) => { display(error, data, response) });
+      break;
+    }
 
 // Hideaki
 app.get('/api/saveUserData', (request, response) => {
-  saveUserData({"first-name": "Hideaki", "last-name": "Yoshida", "approved": false}, (data) => {
-    response.send(data);
-  });
+    case 'submitUserData': { // DONE, except for getting template
+      submitUserData(
+        {
+          firstName: 'Oscar',
+          lastName: 'Shaw',
+          zipCode: '90120',
+        },
+        (error, data) => { display(error, data, response) }
+      );
+      break;
+    }
+    default: {
+      display('Invalid or missing endpoint', null, response);
+      break;
+    }
+  }
 });
 
-app.get('*', (request, response) => {
-  response.sendFile(__dirname + '/client/build/index.html');
+app.get('/api', (request, response) => {
+  switch (request.query.endpoint) {
+    case 'getDriverSignedDocuments': { // DONE
+      getDriverSignedDocuments((error, data) => { display(error, data, response) });
+      break;
+    }
+    case 'getOperatorSignedDocuments': { // DONE
+      getOperatorSignedDocuments((error, data) => { display(error, data, response) });
+      break;
+    }
+    default: {
+      display('Invalid or missing endpoint', null, response);
+      break;
+    }
+  }
 });
 
 app.set('port', (process.env.PORT || 5000));
 app.listen(app.get('port'), () => {
   console.log('Port ' + app.get('port'));
 });
+
+// // DONE, except for text and email notifications
+// app.get('/api/approveSignedDocument', (request, response) => {
+//   approveSignedDocument('-LEbo-3QdesvhpjLzjXy', (error, data) => {
+//     if (error) {
+//       response.send('ERROR:', error);
+//     }
+//     else {
+//       response.send(data);
+//     }
+//   });
+// });
+
+// // TODO, need to check what callback Docusign sends
+// app.get('/api/callbackOperatorSignedDocument', (request, response) => {
+//   callbackOperatorSignedDocument((error, data) => {
+//     if (error) {
+//       response.send('ERROR:', error);
+//     }
+//     else {
+//       response.send(data);
+//     }
+//   });
+// });
+
+// // DONE
+// app.get('/api/getDriverSignedDocuments', (request, response) => {
+//   getDriverSignedDocuments((error, data) => {
+//     if (error) {
+//       response.send('ERROR:', error);
+//     }
+//     else {
+//       response.send(data);
+//     }
+//   });
+// });
+
+// // DONE
+// app.get('/api/getOperatorSignedDocuments', (request, response) => {
+//   getOperatorSignedDocuments((error, data) => {
+//     if (error) {
+//       response.send('ERROR:', error);
+//     }
+//     else {
+//       response.send(data);
+//     }
+//   });
+// });
+
+// // TODO, need to check what callback Docusign sends
+// app.get('/api/callbackDriverSignedDocument', (request, response) => {
+//   callbackDriverSignedDocument((error, data) => {
+//     if (error) {
+//       response.send('ERROR:', error);
+//     }
+//     else {
+//       response.send(data);
+//     }
+//   });
+// });
+
+// // DONE, except for getting template
+// app.get('/api/submitUserData', (request, response) => {
+//   submitUserData(
+//     {
+//       firstName: 'Oscar',
+//       lastName: 'Shaw',
+//       zipCode: '90120',
+//     },
+//     (error, data) => {
+//       if (error) {
+//         response.send('ERROR:', error);
+//       }
+//       else {
+//         response.send(data);
+//       }
+//     }
+//   );
+// });
