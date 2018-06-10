@@ -27,12 +27,13 @@ const display = (error, data, response) => {
 //   console.log(data);
 // });
 
-app.get('/api', (request, response) => {
+app.post('/api', (request, response) => {
   switch (request.query.endpoint) {
     case 'approveSignedDocument': { // DONE, except for text and email notifications
       approveSignedDocument('-LEbo-3QdesvhpjLzjXy', (error, data) => { display(error, data, response) });
       break;
     }
+<<<<<<< HEAD
     case 'getDriverSignedDocuments': { // DONE
         getDriverSignedDocuments((error, data) => { display(error, data, response) });
         break;
@@ -41,6 +42,17 @@ app.get('/api', (request, response) => {
       getOperatorSignedDocuments((error, data) => { display(error, data, response) });
       break;
     }
+||||||| merged common ancestors
+    case 'getDriverSignedDocuments': { // DONE
+      getDriverSignedDocuments((error, data) => { display(error, data, response) });
+      break;
+    }
+    case 'getOperatorSignedDocuments': { // DONE
+      getOperatorSignedDocuments((error, data) => { display(error, data, response) });
+      break;
+    }
+=======
+>>>>>>> b7a89fd2d862d2237491d9aab369193db7e5a5d0
     case 'submitUserData': { // DONE, except for getting template
       submitUserData(
         {
@@ -59,8 +71,21 @@ app.get('/api', (request, response) => {
   }
 });
 
-app.get('*', (request, response) => {
-  response.sendFile(__dirname + '/client/build/index.html');
+app.get('/api', (request, response) => {
+  switch (request.query.endpoint) {
+    case 'getDriverSignedDocuments': { // DONE
+      getDriverSignedDocuments((error, data) => { display(error, data, response) });
+      break;
+    }
+    case 'getOperatorSignedDocuments': { // DONE
+      getOperatorSignedDocuments((error, data) => { display(error, data, response) });
+      break;
+    }
+    default: {
+      display('Invalid or missing endpoint', null, response);
+      break;
+    }
+  }
 });
 
 app.set('port', (process.env.PORT || 5000));

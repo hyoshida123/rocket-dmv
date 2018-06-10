@@ -21,10 +21,12 @@ module.exports = {
 
       // The list status changes call requires at least a from_date OR
       // a set of envelopeIds. here we filter using a from_date
-      const options = {};
+      const options = {
+        method: 'GET',
+      };
 
       // Set from date to filter envelopes (ex: Jan 15, 2018)
-      options.fromDate = '2018/10/06';
+      // options.fromDate = '2018/10/06';
 
       // Call the listStatusChanges() API
       envelopesApi.listStatus(accountId, options, function (error, data, response) {
