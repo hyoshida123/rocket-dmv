@@ -1,8 +1,11 @@
 'use strict';
 const express = require('express');
 const approveSignedDocument = require('./server/approveSignedDocument.js');
+const callbackDriverSignedDocument = require('./server/callbackDriverSignedDocument.js');
+const callbackOperatorSignedDocument = require('./server/callbackOperatorSignedDocument.js');
+const getApprovedDocuments = require('./server/getApprovedDocuments.js');
 const getSignedDocuments = require('./server/getSignedDocuments.js');
-const submitSignedDocument = require('./server/submitSignedDocument.js');
+const saveUserData = require('./server/saveUserData.js');
 const app = express();
 
 app.use(express.static('./client'));
@@ -14,6 +17,13 @@ app.get('/api/approveSignedDocument', (request, response) => {
   });
 });
 
+// Oscar
+app.get('/api/callbackOperatorSignedDocument', (request, response) => {
+  callbackOperatorSignedDocument((data) => {
+    response.send(data);
+  });
+});
+
 // Hideaki
 app.get('/api/getSignedDocuments', (request, response) => {
   getSignedDocuments((data) => {
@@ -21,9 +31,22 @@ app.get('/api/getSignedDocuments', (request, response) => {
   });
 });
 
+app.get('/api/getApprovedDocuments', (request, response) => {
+  getApprovedDocuments((data) => {
+    response.send(data);
+  });
+});
+
 // Sang
-app.get('/api/submitSignedDocument', (request, response) => {
-  submitSignedDocument((data) => {
+app.get('/api/callbackDriverSignedDocument', (request, response) => {
+  callbackDriverSignedDocument((data) => {
+    response.send(data);
+  });
+});
+
+// Hideaki
+app.get('/api/saveUserData', (request, response) => {
+  saveUserData((data) => {
     response.send(data);
   });
 });
