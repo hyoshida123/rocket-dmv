@@ -45,7 +45,7 @@ app.post('/api', (request, response) => {
     }
     case 'receiveEnvelopeStatusChanges': {
       console.log('receiveEnvelopeStatusChanges!!!');
-      console.log(request.body);
+      console.log(request);
       break;
     }
     case 'submitUserData': { // DONE, except for getting template
