@@ -34,8 +34,8 @@ app.get('/api', (request, response) => {
       break;
     }
     case 'getDriverSignedDocuments': { // DONE
-      getDriverSignedDocuments((error, data) => { display(error, data, response) });
-      break;
+        getDriverSignedDocuments((error, data) => { display(error, data, response) });
+        break;
     }
     case 'getOperatorSignedDocuments': { // DONE
       getOperatorSignedDocuments((error, data) => { display(error, data, response) });
