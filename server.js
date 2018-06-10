@@ -31,7 +31,7 @@ const display = (error, data, response) => {
 // });
 
 app.get('/', (request, response) => {
-  res.render("./index.html");
+  response.render("./index.html");
 });
 
 app.post('/api', (request, response) => {
