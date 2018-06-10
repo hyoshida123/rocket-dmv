@@ -23,9 +23,9 @@ module.exports = (userData, callback) => {
       const template = {
         id: '32a7dd00-5df7-431d-98f9-6269c7b4d9a7',
         role: {
-          roleName: 'Applicant',
-          name: 'Oscar Shaw',
-          email: 'oscar.shaw@yahoo.com',
+          roleName: 'Applicantd',
+          name: `${userData.firstName} ${userData.lastName}`,
+          email: userData.email,
         },
       }
       docusign.sendEmailSignatureRequest(template, (error, docusignResponse) => {
