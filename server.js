@@ -5,7 +5,7 @@ const callbackDriverSignedDocument = require('./server/callbackDriverSignedDocum
 const callbackOperatorSignedDocument = require('./server/callbackOperatorSignedDocument.js');
 const getOperatorSignedDocuments = require('./server/getOperatorSignedDocuments.js');
 const getDriverSignedDocuments = require('./server/getDriverSignedDocuments.js');
-const saveUserData = require('./server/saveUserData.js');
+const submitUserData = require('./server/submitUserData.js');
 const app = express();
 
 app.use(express.static('./client'));
@@ -25,6 +25,10 @@ app.get('/api', (request, response) => {
       approveSignedDocument('-LEbo-3QdesvhpjLzjXy', (error, data) => { display(error, data, response) });
       break;
     }
+    case 'callbackDriverSignedDocument': { // TODO, need to check what callback Docusign sends
+      callbackDriverSignedDocument((error, data) => { display(error, data, response) });
+      break;
+    }
     case 'callbackOperatorSignedDocument': { // TODO, need to check what callback Docusign sends
       callbackOperatorSignedDocument((error, data) => { display(error, data, response) });
       break;
@@ -37,12 +41,15 @@ app.get('/api', (request, response) => {
       getOperatorSignedDocuments((error, data) => { display(error, data, response) });
       break;
     }
-    case 'callbackDriverSignedDocument': { // TODO, need to check what callback Docusign sends
-      callbackDriverSignedDocument((error, data) => { display(error, data, response) });
-      break;
-    }
-    case 'saveUserData': { // DONE, except for getting template
-      callbackDriverSignedDocument((error, data) => { display(error, data, response) });
+    case 'submitUserData': { // DONE, except for getting template
+      submitUserData(
+        {
+          firstName: 'Oscar',
+          lastName: 'Shaw',
+          zipCode: '90120',
+        },
+        (error, data) => { display(error, data, response) }
+      );
       break;
     }
     default: {
@@ -113,8 +120,8 @@ app.get('/api', (request, response) => {
 // });
 
 // // DONE, except for getting template
-// app.get('/api/saveUserData', (request, response) => {
-//   saveUserData(
+// app.get('/api/submitUserData', (request, response) => {
+//   submitUserData(
 //     {
 //       firstName: 'Oscar',
 //       lastName: 'Shaw',

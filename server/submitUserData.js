@@ -11,7 +11,23 @@ module.exports = (userData, callback) => {
       // Create DocuSign template
       
       // Send template to DocuSign to send email requesting signature to user
-      docusign.sendEmailSignatureRequest((error, docusignResponse) => {
+      // template = {
+      //   id: '',
+      //   role: {
+      //     roleName: '',
+      //     name: '',
+      //     email: '',
+      //   },
+      // }
+      const template = {
+        id: '32a7dd00-5df7-431d-98f9-6269c7b4d9a7',
+        role: {
+          roleName: 'Applicant',
+          name: 'Oscar Shaw',
+          email: 'oscar.shaw@yahoo.com',
+        },
+      }
+      docusign.sendEmailSignatureRequest(template, (error, docusignResponse) => {
         if (error) {
           callback(error, null);
         }

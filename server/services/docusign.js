@@ -70,7 +70,7 @@ module.exports = {
       // envelope.templateId = '32a7dd00-5df7-431d-98f9-6269c7b4d9a7';
 
       // create a template role with a valid templateId and roleName and assign signer info
-      const templateRole = new docusign.TemplateRole();
+      let templateRole = new docusign.TemplateRole();
       templateRole = Object.assign(templateRole, template.role);
       // templateRole.roleName = 'Applicant';
       // templateRole.name = 'Oscar Shaw';
