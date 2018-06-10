@@ -40,6 +40,15 @@ module.exports = {
       callback(error, null);
     });
   },
+  remove: (collection, key, callback) => {
+    const reference = database.ref(collection);
+    reference.remove(key);
+    reference.on('value', (data) => {
+      callback(null, data.val());
+    }, (error) => {
+      callback(error, null);
+    });
+  },
   update: (collection, key, payload, callback) => {
     const reference = database.ref(collection);
     reference.child(key).set(payload);
