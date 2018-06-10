@@ -1,8 +1,11 @@
-
 (function ($) {
   // USE STRICT
   "use strict";
+  $(".b").on('click', function(e) {
+    this.className = 'b btn btn-primary btn-xs';
+  });
 
+  $
   try {
     //WidgetChart 1
     var ctx = document.getElementById("widgetChart1");
