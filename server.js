@@ -45,7 +45,19 @@ app.post('/api', (request, response) => {
     }
     case 'receiveEnvelopeStatusChanges': {
       console.log('receiveEnvelopeStatusChanges!!!');
-      console.log(request);
+      let body = '';
+      request.on('data', (chunk) => {
+        body.push(chunk);
+      }).on('end', () => {
+        body = Buffer.concat(body).toString();
+        // At this point, 'body' has the entire request body stored in it as a string
+        try {
+          body = JSON.parse(body);
+          console.log(body);
+        } catch (error) {
+          console.trace(error);
+        }
+      });
       break;
     }
     case 'submitUserData': { // DONE, except for getting template
