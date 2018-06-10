@@ -1,4 +1,4 @@
-const firebase = require('./../firebase.js');
+const firebase = require('./services/firebase.js');
 
 module.exports = (key, callback) => {
   // Update document's approved boolean field in Google Clouds
