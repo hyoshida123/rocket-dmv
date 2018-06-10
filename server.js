@@ -33,6 +33,16 @@ app.post('/api', (request, response) => {
       approveSignedDocument('-LEbo-3QdesvhpjLzjXy', (error, data) => { display(error, data, response) });
       break;
     }
+
+    case 'getDriverSignedDocuments': { // DONE
+      getDriverSignedDocuments((error, data) => { display(error, data, response) });
+      break;
+    }
+    case 'getOperatorSignedDocuments': { // DONE
+      getOperatorSignedDocuments((error, data) => { display(error, data, response) });
+      break;
+    }
+
     case 'submitUserData': { // DONE, except for getting template
       submitUserData(
         {
