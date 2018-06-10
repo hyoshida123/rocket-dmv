@@ -46,7 +46,7 @@ app.get('/api/callbackDriverSignedDocument', (request, response) => {
 
 // Hideaki
 app.get('/api/saveUserData', (request, response) => {
-  saveUserData((data) => {
+  saveUserData({"first-name": "Hideaki", "last-name": "Yoshida", "approved": false}, (data) => {
     response.send(data);
   });
 });
