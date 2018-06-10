@@ -23,9 +23,9 @@ const display = (error, data, response) => {
 //   console.log(envelopes);
 // });
 
-docusign.getAccountListStatus((error, data) => { // Listen for updates
-  console.log(data);
-});
+// docusign.getAccountListStatus((error, data) => { // Listen for updates
+//   console.log(data);
+// });
 
 app.get('/api', (request, response) => {
   switch (request.query.endpoint) {
@@ -57,10 +57,6 @@ app.get('/api', (request, response) => {
       break;
     }
   }
-});
-
-app.get('*', (request, response) => {
-  response.sendFile(__dirname + '/client/build/index.html');
 });
 
 app.set('port', (process.env.PORT || 5000));
