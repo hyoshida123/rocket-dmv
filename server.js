@@ -27,18 +27,10 @@ const display = (error, data, response) => {
 //   console.log(data);
 // });
 
-app.get('/api', (request, response) => {
+app.post('/api', (request, response) => {
   switch (request.query.endpoint) {
     case 'approveSignedDocument': { // DONE, except for text and email notifications
       approveSignedDocument('-LEbo-3QdesvhpjLzjXy', (error, data) => { display(error, data, response) });
-      break;
-    }
-    case 'getDriverSignedDocuments': { // DONE
-      getDriverSignedDocuments((error, data) => { display(error, data, response) });
-      break;
-    }
-    case 'getOperatorSignedDocuments': { // DONE
-      getOperatorSignedDocuments((error, data) => { display(error, data, response) });
       break;
     }
     case 'submitUserData': { // DONE, except for getting template
@@ -50,6 +42,23 @@ app.get('/api', (request, response) => {
         },
         (error, data) => { display(error, data, response) }
       );
+      break;
+    }
+    default: {
+      display('Invalid or missing endpoint', null, response);
+      break;
+    }
+  }
+});
+
+app.get('/api', (request, response) => {
+  switch (request.query.endpoint) {
+    case 'getDriverSignedDocuments': { // DONE
+      getDriverSignedDocuments((error, data) => { display(error, data, response) });
+      break;
+    }
+    case 'getOperatorSignedDocuments': { // DONE
+      getOperatorSignedDocuments((error, data) => { display(error, data, response) });
       break;
     }
     default: {
