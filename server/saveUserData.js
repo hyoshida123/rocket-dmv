@@ -1,15 +1,24 @@
 const docusign = require('./services/docusign');
+const firebase = require('./services/firebase');
 
-module.exports = (callback) => {
+module.exports = (userData, callback) => {
   // Save user data to database
-  // Create DocuSign template
-  // Send template to DocuSign to send email requesting signature to user
-  docusign.sendEmailSignatureRequest((error, data) => {
+  firebase.push('user-data', userData, (error, firebaseResponse) => {
     if (error) {
-      console.log(error);
+      callback(error, null);
     }
     else {
-      callback(data);
+      // Create DocuSign template
+      
+      // Send template to DocuSign to send email requesting signature to user
+      docusign.sendEmailSignatureRequest((error, docusignResponse) => {
+        if (error) {
+          callback(error, null);
+        }
+        else {
+          callback(null, docusignResponse);
+        }
+      });
     }
   });
 }

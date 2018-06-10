@@ -1,12 +1,23 @@
 const firebase = require('./services/firebase.js');
 
 module.exports = (key, callback) => {
-  // Update document's approved boolean field in Google Clouds
-  firebase.update('signed-documents', key, {approved: true}, (error, data) => {
+	// Remove from driver signed docs
+	firebase.remove('documents-signed-driver', key, (error, removeResponse) => {
   	if (error) {
-  		callback(error);
-  	} else {
-    	callback('approveSignedDocument response');
-	}
-  });
+  		callback(error, null);
+		}
+		else {
+			// Add to operator signed docs
+			firebase.push('documents-signed-operator', pushResponse, (error, pushResponse) => {
+				if (error) {
+					callback(error, null);
+				}
+				else {
+					callback(pushResponse);
+					// Notify driver
+				}
+			});
+		}
+	});
+	
 }

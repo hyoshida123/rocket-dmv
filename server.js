@@ -3,52 +3,90 @@ const express = require('express');
 const approveSignedDocument = require('./server/approveSignedDocument.js');
 const callbackDriverSignedDocument = require('./server/callbackDriverSignedDocument.js');
 const callbackOperatorSignedDocument = require('./server/callbackOperatorSignedDocument.js');
-const getApprovedDocuments = require('./server/getApprovedDocuments.js');
-const getSignedDocuments = require('./server/getSignedDocuments.js');
+const getOperatorSignedDocuments = require('./server/getOperatorSignedDocuments.js');
+const getDriverSignedDocuments = require('./server/getDriverSignedDocuments.js');
 const saveUserData = require('./server/saveUserData.js');
 const app = express();
 
 app.use(express.static('./client'));
 
-// Oscar
+// DONE, except for text and email notifications
 app.get('/api/approveSignedDocument', (request, response) => {
-  approveSignedDocument('-LEbo-3QdesvhpjLzjXy', (data) => {
-    response.send(data);
+  approveSignedDocument('-LEbo-3QdesvhpjLzjXy', (error, data) => {
+    if (error) {
+      response.send('ERROR:', error);
+    }
+    else {
+      response.send(data);
+    }
   });
 });
 
-// Oscar
+// TODO, need to check what callback Docusign sends
 app.get('/api/callbackOperatorSignedDocument', (request, response) => {
-  callbackOperatorSignedDocument((data) => {
-    response.send(data);
+  callbackOperatorSignedDocument((error, data) => {
+    if (error) {
+      response.send('ERROR:', error);
+    }
+    else {
+      response.send(data);
+    }
   });
 });
 
-// Hideaki
-app.get('/api/getSignedDocuments', (request, response) => {
-  getSignedDocuments((data) => {
-    response.send(data);
+// DONE
+app.get('/api/getDriverSignedDocuments', (request, response) => {
+  getDriverSignedDocuments((error, data) => {
+    if (error) {
+      response.send('ERROR:', error);
+    }
+    else {
+      response.send(data);
+    }
   });
 });
 
-app.get('/api/getApprovedDocuments', (request, response) => {
-  getApprovedDocuments((data) => {
-    response.send(data);
+// DONE
+app.get('/api/getOperatorSignedDocuments', (request, response) => {
+  getOperatorSignedDocuments((error, data) => {
+    if (error) {
+      response.send('ERROR:', error);
+    }
+    else {
+      response.send(data);
+    }
   });
 });
 
-// Sang
+// TODO, need to check what callback Docusign sends
 app.get('/api/callbackDriverSignedDocument', (request, response) => {
-  callbackDriverSignedDocument((data) => {
-    response.send(data);
+  callbackDriverSignedDocument((error, data) => {
+    if (error) {
+      response.send('ERROR:', error);
+    }
+    else {
+      response.send(data);
+    }
   });
 });
 
-// Hideaki
+// DONE, except for getting template
 app.get('/api/saveUserData', (request, response) => {
-  saveUserData((data) => {
-    response.send(data);
-  });
+  saveUserData(
+    {
+      firstName: 'Oscar',
+      lastName: 'Shaw',
+      zipCode: '90120',
+    },
+    (error, data) => {
+      if (error) {
+        response.send('ERROR:', error);
+      }
+      else {
+        response.send(data);
+      }
+    }
+  );
 });
 
 app.get('*', (request, response) => {

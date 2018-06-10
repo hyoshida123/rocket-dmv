@@ -5,18 +5,10 @@ const apiClient = new docusign.ApiClient();
 let accountId = 'e32318d9-7c98-4adb-bf32-746edc3317a8';
 
 const bearerToken = 'eyJ0eXAiOiJNVCIsImFsZyI6IlJTMjU2Iiwia2lkIjoiNjgxODVmZjEtNGU1MS00Y2U5LWFmMWMtNjg5ODEyMjAzMzE3In0.AQgAAAABAAUABwAAXHZass7VSAgAAMQ6vLrO1UgCAKIhy8IofvRBpmDvnvIXrUsVAAEAAAAYAAEAAAAFAAAADQAkAAAAODAyYzNmZmUtOTM0Yy00M2I3LTljZGItNGMzZTA2NTZmZjU0IwAkAAAAODAyYzNmZmUtOTM0Yy00M2I3LTljZGItNGMzZTA2NTZmZjU0.OSPH2ihD0Ehc0cA0kxHfy0Fup6ttzWCmAybxKlr5_7sZZKqZJZ4MtLrsU44nJCnm4HoKUtBMfFV_MnX7Ag5qLJsdjH5M5pvWN-WaYSWmQk2G-hIaURVB-2ss3urQM-0wcLJwFmcme4bnv_USKi67-WWDne7KDqrggB2o2thu91kIUXhEWtKfjHuxmjBgU5o5MXRbIx540PPlAJMPghZJTqKLpRrOvE55sI6MDU_Gq-_T_KUWIK_L2dZdwrN4vFobXG14NvmhiMKidpmsEnZVx2xZaGSIamSrLgjqZUM_tw7SzzaeUWUlRoAZnAGB_GeAwpGt1zFF5OaNJWACx23Ang';
-const integratorKey = '802c3ffe-934c-43b7-9cdb-4c3e0656ff54';                    // Integrator Key associated with your DocuSign Integration
-const email = 'oscar.shaw@yahoo.com';                     // Email for your DocuSign Account
-const password = 'Dmv123';               // Password for your DocuSign Account
-const docusignEnv = 'demo';                     // DocuSign Environment generally demo for testing purposes
-const fullName = 'Oscar Shaw';                   // Recipient's Full Name
-const recipientEmail = 'oscar.shaw@yahoo.com'; // Recipient's Email
-const templateId = '32a7dd00-5df7-431d-98f9-6269c7b4d9a7';                       // ID of the Template you want to create the Envelope with
-const templateRoleName = 'Applicant';                 // Role Name of the Template
-
-const baseUrl = 'https://' + docusignEnv + '.docusign.net/restapi';
+const integratorKey = '802c3ffe-934c-43b7-9cdb-4c3e0656ff54';
+const baseUrl = 'https://demo.docusign.net/restapi';
 const userId = 'c2cb21a2-7e28-41f4-a660-ef9ef217ad4b';
-const oAuthBaseUrl = 'account-d.docusign.com'; // use account.docusign.com for Live/Production
+const oAuthBaseUrl = 'account-d.docusign.com';
 const redirectURI = 'https://www.docusign.com/api';
 const privateKeyFilename = 'keys/docusign_private_key.txt';
 
@@ -56,29 +48,36 @@ module.exports = {
       }
     });
   },
-  sendEmailSignatureRequest: (callback) => {
+  sendEmailSignatureRequest: (template, callback) => {
+    // template = {
+    //   id: '',
+    //   role: {
+    //     roleName: '',
+    //     name: '',
+    //     email: '',
+    //   },
+    // }
     module.exports.getBearerToken(() => {
-      var templateRoleName = 'Needs to sign';
+      const templateRoleName = 'Needs to sign';
 
       // create an envelope to be signed
-      var envelope = new docusign.EnvelopeDefinition();
+      const envelope = new docusign.EnvelopeDefinition();
       envelope.emailSubject = 'Please Sign my Node SDK Envelope';
       envelope.emailBlurb = 'Hello, Please sign my Node SDK Envelope.';
 
       // / assign template information including ID and role(s)
-      envelope.templateId = '32a7dd00-5df7-431d-98f9-6269c7b4d9a7';
+      envelope.templateId = template.id;
+      // envelope.templateId = '32a7dd00-5df7-431d-98f9-6269c7b4d9a7';
 
       // create a template role with a valid templateId and roleName and assign signer info
-      var templateRole = new docusign.TemplateRole();
-      // templateRole.roleName = 'Intern';
-      // templateRole.name = 'SangBin';
-      // templateRole.email = 'rkooo567@naver.com';
-      templateRole.roleName = 'Applicant';
-      templateRole.name = 'Oscar Shaw';
-      templateRole.email = 'oshaw587@insite.4cd.edu'
+      const templateRole = new docusign.TemplateRole();
+      templateRole = Object.assign(templateRole, template.role);
+      // templateRole.roleName = 'Applicant';
+      // templateRole.name = 'Oscar Shaw';
+      // templateRole.email = 'oshaw587@insite.4cd.edu'
 
       // create a list of template roles and add our newly created role
-      var templateRolesList = [];
+      const templateRolesList = [];
       templateRolesList.push(templateRole);
 
       // assign template role(s) to the envelope
@@ -87,7 +86,7 @@ module.exports = {
       // send the envelope by setting |status| to "sent". To save as a draft set to "created"
       envelope.status = 'sent';
 
-      var envelopesApi = new docusign.EnvelopesApi(apiClient);
+      const envelopesApi = new docusign.EnvelopesApi(apiClient);
 
       envelopesApi.createEnvelope(accountId, {'envelopeDefinition': envelope}, function (error, envelopeSummary, response) {
         if (error) {
