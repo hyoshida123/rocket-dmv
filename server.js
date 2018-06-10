@@ -45,7 +45,7 @@ app.post('/api', (request, response) => {
     }
     case 'receiveEnvelopeStatusChanges': {
       console.log('receiveEnvelopeStatusChanges!!!');
-      let body = '';
+      let body = [];
       request.on('data', (chunk) => {
         body.push(chunk);
       }).on('end', () => {
