@@ -23,9 +23,9 @@ const display = (error, data, response) => {
 //   console.log(envelopes);
 // });
 
-// docusign.getAccountListStatus((error, data) => { // Listen for updates
-//   console.log(data);
-// });
+docusign.getAccountListStatus((error, data) => { // Listen for updates
+  console.log(data);
+});
 
 app.get('/api', (request, response) => {
   switch (request.query.endpoint) {
