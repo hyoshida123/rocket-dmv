@@ -1,8 +1,12 @@
 const firebase = require('./../firebase.js');
 
-module.exports = (callback) => {
+module.exports = (key, callback) => {
   // Update document's approved boolean field in Google Clouds
-  firebase.push('signed-documents', {key: 'value'}, (error, data) => {
-    callback('approveSignedDocument response');
+  firebase.update('signed-documents', key, {approved: true}, (error, data) => {
+  	if (error) {
+  		callback(error);
+  	} else {
+    	callback('approveSignedDocument response');
+	}
   });
 }

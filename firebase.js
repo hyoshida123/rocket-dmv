@@ -42,7 +42,7 @@ module.exports = {
   },
   update: (collection, key, payload, callback) => {
     const reference = database.ref(collection);
-    reference.child(key).set(newState);
+    reference.child(key).set(payload);
     reference.on('value', (data) => {
       callback(null, data.val());
     }, (error) => {

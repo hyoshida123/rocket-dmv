@@ -12,7 +12,7 @@ app.use(express.static('./client'));
 
 // Oscar
 app.get('/api/approveSignedDocument', (request, response) => {
-  approveSignedDocument((data) => {
+  approveSignedDocument('-LEbo-3QdesvhpjLzjXy', (data) => {
     response.send(data);
   });
 });
