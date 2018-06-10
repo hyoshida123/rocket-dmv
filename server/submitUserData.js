@@ -4,7 +4,7 @@ const firebase = require('./services/firebase');
 module.exports = (userData, callback) => {
   // Save user data to database
   console.log(JSON.stringify(userData, null, 2));
-  if (Object.keys(userData).length) {
+  if (JSON.stringify(userData, null, 2) !== '{}') {
     userData = JSON.parse(Object.keys(userData)[0]);
   }
   firebase.push('user-data', userData, (error, firebaseResponse) => {
