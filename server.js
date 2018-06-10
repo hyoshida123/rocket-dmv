@@ -19,9 +19,13 @@ const display = (error, data, response) => {
   }
 }
 
-docusign.signatureUpdateListener((error, envelopes) => { // Listen for updates
-  console.log(envelopes);
-});
+// docusign.signatureUpdateListener((error, envelopes) => { // Listen for updates
+//   console.log(envelopes);
+// });
+
+// docusign.getAccountListStatus((error, data) => { // Listen for updates
+//   console.log(data);
+// });
 
 app.get('/api', (request, response) => {
   switch (request.query.endpoint) {
