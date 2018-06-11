@@ -1,14 +1,14 @@
-<h1 align="center">
-<img src=https://challengepost-s3-challengepost.netdna-ssl.com/photos/production/software_photos/000/651/999/datas/gallery.jpg />
-</h1>
-
-[![build-status](https://img.shields.io/travis/oshaw/assist-client/master.svg)](https://travis-ci.org/oshaw/rocket-dmv)
+<p align="center">
+  <img src=https://i.imgur.com/7xbNd9e.jpg />
+  <br />
+  <a href=https://devpost.com/software/rocket-dmv>Devpost</a>
+  <br />
+  <a href=oshaw-rocket-dmv.herokuapp.com>Heroku</a>
+  <br />
+  <a href="https://travis-ci.org/oshaw/rocket-dmv"><img src="https://img.shields.io/travis/webtorrent/oshaw/master.svg" alt="travis"></a>
+</p>
 
 Rocket DMV allows end users to apply for a DMV license from a mobile phone. We also provide an interface for DMV officers to receive, analyze and approve/reject applications. Once an application is reviewed, its status changes to either approved/rejected and we notify applicants by sending them a text message or email.
-
-- [Devpost](https://devpost.com/software/rocket-dmv)
-
-- [Heroku](oshaw-rocket-dmv.herokuapp.com)
 
 ## API endpoints
 
