@@ -1,4 +1,5 @@
 # Rocket DMV
+Rocket DMV allows end users to apply for a DMV license from a mobile phone. We provide interface for DMV officers to receive, analyze and approve/reject applications. Once an application is reviewed, its status changes to either approved/rejected and we notify applicants by sending them a text message or email.
 
 ## API endpoints
 baseurl: https://oshaw-dmv.herokuapp.com/
