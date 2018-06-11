@@ -1,9 +1,9 @@
 <p align="center">
   <img src=https://i.imgur.com/7xbNd9e.jpg />
   <br />
+  <a href="https://travis-ci.org/oshaw/rocket-dmv"><img src="https://img.shields.io/travis/oshaw/rocket-dmv/master.svg" alt="travis" /></a>
+  <br />
   <b>
-     <a href="https://travis-ci.org/oshaw/rocket-dmv"><img src="https://img.shields.io/travis/oshaw/rocket-dmv/master.svg" alt="travis" /></a>
-    <br />
     <a href=https://devpost.com/software/rocket-dmv>Devpost</a>
     <br />
     <a href=oshaw-rocket-dmv.herokuapp.com>Heroku</a>
