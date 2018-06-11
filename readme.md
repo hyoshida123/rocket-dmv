@@ -1,7 +1,6 @@
 <p align="center">
   <img src="https://i.imgur.com/7xbNd9e.jpg" />
   <br />
-  <br />
   <b>
     <a href=https://devpost.com/software/rocket-dmv>Devpost</a>
     <br />
