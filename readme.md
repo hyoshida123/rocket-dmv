@@ -12,7 +12,7 @@ Rocket DMV allows end users to apply for a DMV license from a mobile phone. We a
 
 ## API endpoints
 
-Disabled now.
+Currently disabled
 
 ```
 1. approveSignedDocument:
@@ -33,7 +33,7 @@ Disabled now.
    Pass in first name and last name so only documents linked to user return
   
 4. submitUserData:
-   method: GET
+   method: POST
    Saves user data to Firebase and sends Docusign signature request email
    Call on iOS
    Pass in firstName, lastName, zipCode
