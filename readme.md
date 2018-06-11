@@ -1,11 +1,13 @@
 <p align="center">
   <img src=https://i.imgur.com/7xbNd9e.jpg />
   <br />
-  <a href=https://devpost.com/software/rocket-dmv>Devpost</a>
-  <br />
-  <a href=oshaw-rocket-dmv.herokuapp.com>Heroku</a>
-  <br />
-  <a href="https://travis-ci.org/oshaw/rocket-dmv"><img src="https://img.shields.io/travis/oshaw/rocket-dmv/master.svg" alt="travis" /></a>
+  <b>
+     <a href="https://travis-ci.org/oshaw/rocket-dmv"><img src="https://img.shields.io/travis/oshaw/rocket-dmv/master.svg" alt="travis" /></a>
+    <br />
+    <a href=https://devpost.com/software/rocket-dmv>Devpost</a>
+    <br />
+    <a href=oshaw-rocket-dmv.herokuapp.com>Heroku</a>
+  </b>
 </p>
 
 Rocket DMV allows end users to apply for a DMV license from a mobile phone. We also provide an interface for DMV officers to receive, analyze and approve/reject applications. Once an application is reviewed, its status changes to either approved/rejected and we notify applicants by sending them a text message or email.
