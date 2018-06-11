@@ -1,6 +1,5 @@
 <p align="center">
-  <img src=https://i.imgur.com/7xbNd9e.jpg />
-  <br />
+  <img src="https://i.imgur.com/7xbNd9e.jpg" />
   <br />
   <a href="https://travis-ci.org/oshaw/rocket-dmv"><img src="https://img.shields.io/travis/oshaw/rocket-dmv/master.svg" alt="travis" /></a>
   <br />
@@ -15,7 +14,7 @@ Rocket DMV allows end users to apply for a DMV license from a mobile phone. We a
 
 ## API endpoints
 
-ex) **API is disabled now.
+**API is disabled now.
 
 ```
 1. approveSignedDocument:
